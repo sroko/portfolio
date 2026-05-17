@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R. S. — Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Karla:wght@400;700&family=Kumbh+Sans:wght@300;400;600&family=Tiro+Tamil&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --subtle: #888888;
+            --border: #eeeeee;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* --- LANDING STATE --- */
+        #landing {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: opacity 0.5s ease;
+        }
+
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        td {
+            padding: 12px 0;
+        }
+
+        .brand-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.0em;
+            font-size: 20px;
+            padding-bottom: 60px;
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        .project-link:hover {
+            opacity: 0.5;
+        }
+
+        .disabled {
+            color: var(--subtle);
+            cursor: default;
+        }
+
+        .footer-nav {
+            margin-top: 100px;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            color: var(--text);
+        }
+
+        .footer-nav a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- PROJECT VIEW (REUSABLE) --- */
+        .project-page {
+            display: none;
+            padding: 100px 5% 200px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 120px;
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+        }
+
+        .project-desc {
+            font-size: 12px;
+            color: var(--subtle);
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .grid-item {
+            background-color: #fbfbfb;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- RODEVO SPECIFIC RATIOS --- */
+        .rodevo-logos { grid-column: span 12; aspect-ratio: 18000 / 6000; }
+        .rodevo-const { grid-column: span 6; aspect-ratio: 1; }
+        .rodevo-type { grid-column: span 8; background: #fff; padding: 60px; flex-direction: column; align-items: flex-start; justify-content: center; }
+        .rodevo-color { grid-column: span 4; background: #fff; padding: 40px; flex-direction: column; align-items: flex-start; justify-content: flex-end; }
+        .rodevo-mock-hero { grid-column: span 12; aspect-ratio: 7952 / 5304; }
+        .rodevo-mock-1 { grid-column: span 7; aspect-ratio: 6000 / 4500; }
+        .rodevo-mock-2 { grid-column: span 5; aspect-ratio: 1934 / 3000; }
+
+        /* --- SCHOOL SPECIFIC RATIOS --- */
+        .school-banner { grid-column: span 12; aspect-ratio: 12784 / 6000; }
+        .school-logo-1-1 { grid-column: span 4; aspect-ratio: 1; }
+        .school-type { grid-column: span 8; background: #fff; padding: 60px; flex-direction: column; align-items: flex-start; justify-content: center; }
+        .school-color { grid-column: span 4; background: #fff; padding: 40px; flex-direction: column; align-items: flex-start; justify-content: flex-end; }
+        .school-tote { grid-column: span 12; aspect-ratio: 6000 / 4500; }
+        .school-paper { grid-column: span 6; aspect-ratio: 4000 / 2777; }
+        .school-sign { grid-column: span 6; aspect-ratio: 3500 / 2433; }
+
+        .color-dot { width: 30px; height: 30px; border-radius: 50%; margin-bottom: 12px; border: 1px solid var(--border); }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 150px;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+
+    <section id="landing">
+        <table>
+            <tr><td class="brand-name">rs.</td></tr>
+            <tr><td><a class="project-link" onclick="showProject('rodevo-view')">[ RODEVO — 01 ]</a></td></tr>
+            <tr><td><a class="project-link" onclick="showProject('school-view')">[ SCHOOL — 02 ]</a></td></tr>
+            <tr><td><span class="project-link disabled">[ YEARBOOK — 03 ]</span></td></tr>
+        </table>
+
+        <div class="footer-nav">
+            <a href="mailto:roko.sbiz@email.com">EMAIL</a> &nbsp;&nbsp; | &nbsp;&nbsp; 
+            <a href="#">X</a> &nbsp;&nbsp; | &nbsp;&nbsp; 
+            <a href="#">BEHANCE</a>
+        </div>
+    </section>
+
+    <section id="rodevo-view" class="project-page">
+        <div class="project-header">
+            <div class="project-title">RODEVO</div>
+            <div class="project-desc">
+                IDENTITY CONSTRUCTION FOR A PREMIUM EDUCATIONAL ECOSYSTEM. 
+                BUILT ON A RIGID GEOMETRIC GRID TO ENSURE PERMANENCE.
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-item rodevo-logos"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026266/logos_3_versions_ffctpp.png"></div>
+            <div class="grid-item rodevo-const"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026664/construction_1_zyyrhf.png"></div>
+            <div class="grid-item rodevo-const"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026660/construction_2_d9nsml.png"></div>
+            <div class="grid-item rodevo-type">
+                <span style="font-size: 10px; color: var(--subtle); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase;">Typography</span>
+                <div style="font-family: 'Kumbh Sans', sans-serif; font-size: 42px; margin-bottom: 5px;">Kumbh Sans</div>
+                <div style="font-family: 'Tiro Tamil', serif; font-size: 42px; font-weight: 400; font-style: italic;">Tiro Tamil</div>
+            </div>
+            <div class="grid-item rodevo-color">
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <div class="color-dot" style="background: #FFFFFF;"></div>
+                    <div class="color-dot" style="background: #0A0566;"></div>
+                    <div class="color-dot" style="background: #BCBDBF;"></div>
+                </div>
+                <span style="font-size: 9px; letter-spacing: 1px;">#FFFFFF / #0A0566 / #BCBDBF</span>
+            </div>
+            <div class="grid-item rodevo-mock-hero"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026653/mockup_3_b0wpiv.png"></div>
+            <div class="grid-item rodevo-mock-1"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026265/mockup_1_wc4c8u.jpg"></div>
+            <div class="grid-item rodevo-mock-2"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026264/mockup_2_db1lwv.jpg"></div>
+        </div>
+        <a href="#" class="back-btn" onclick="hideProject()">[ BACK TO ARCHIVE ]</a>
+    </section>
+
+    <section id="school-view" class="project-page">
+        <div class="project-header">
+            <div class="project-title">SCHOOL</div>
+            <div class="project-desc">
+                A MODERN ACADEMIC MARK DESIGNED FOR TRADITION AND TECH. 
+                SOCIALLY CONSCIOUS ARCHITECTURE FOR THE NEXT GENERATION.
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-item school-banner"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026829/v4_fgtkic.png"></div>
+
+            <div class="grid-item school-logo-1-1"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026825/v1_mxxvwx.png"></div>
+            <div class="grid-item school-logo-1-1"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026822/v2_bouwwa.png"></div>
+            <div class="grid-item school-logo-1-1"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026839/v3_dkedky.png"></div>
+
+            <div class="grid-item school-type">
+                <span style="font-size: 10px; color: var(--subtle); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase;">Typography</span>
+                <div style="font-family: 'Karla', sans-serif; font-size: 42px; font-weight: 400; margin-bottom: 5px;">Karla Semi Bold</div>
+                <div style="font-family: 'Karla', sans-serif; font-size: 42px; font-weight: 700;">Karla Light</div>
+            </div>
+            <div class="grid-item school-color">
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <div class="color-dot" style="background: #84A98C;"></div>
+                    <div class="color-dot" style="background: #DCE7D0;"></div>
+                    <div class="color-dot" style="background: #1E392A;"></div>
+                </div>
+                <span style="font-size: 9px; letter-spacing: 1px;">#84A98C / #DCE7D0 / #1E392A</span>
+            </div>
+
+            <div class="grid-item school-tote"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026853/tote_mxay1e.png"></div>
+
+            <div class="grid-item school-paper"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026861/paper_wh4gbz.jpg"></div>
+            <div class="grid-item school-sign"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026857/sign_ltjc8e.jpg"></div>
+
+            <div class="grid-item school-banner"><img src="https://res.cloudinary.com/df5qvqbcd/image/upload/v1779026819/v5_azm3dv.png"></div>
+        </div>
+        <a href="#" class="back-btn" onclick="hideProject()">[ BACK TO ARCHIVE ]</a>
+    </section>
+
+    <script>
+        function showProject(id) {
+            document.getElementById('landing').style.display = 'none';
+            document.querySelectorAll('.project-page').forEach(p => p.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function hideProject() {
+            document.querySelectorAll('.project-page').forEach(p => p.style.display = 'none');
+            document.getElementById('landing').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
